@@ -1,0 +1,80 @@
+/*import java.io.*;
+import java.net.*;
+import java.util.*;
+
+public class Main {
+    //A private hashSet of the printWriter for clientWriters that handles broadcasting the message
+    private static Set<PrintWriter> clientWriters = new HashSet<>();
+
+    public static void main(String[] args) throws Exception {
+        //Starting the Server
+        ServerSocket serverSocket = new ServerSocket(8888);
+        System.out.println("Server Online! Waiting for client to connect.");
+
+        while (true) {
+            //running the loop for the server
+            Socket socket = serverSocket.accept();
+            //accepting client's connection
+            System.out.println("Client connected successfully!");
+
+            //a clientHandler that takes a socket of a specific client and starts a new Thread to serve it
+            new ClientHandler(socket).start();
+        }
+    }
+
+    //Per-Client Handling, extended by the serving Thread for input and output
+    private static class ClientHandler extends Thread {
+        private Socket socket;
+        private PrintWriter out;
+        private BufferedReader in;
+
+        //Constructor which handles the socket of a client, it must be public since in main, we need to start
+        //the thread
+        public ClientHandler(Socket socket) {
+            this.socket = socket;
+        }
+
+        public void run() {
+            try {
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                out = new PrintWriter(socket.getOutputStream(), true);
+
+                // To write the clientWriters to the global set and make sure two clients don't override each
+                //other's data
+
+                synchronized (clientWriters) {
+                    clientWriters.add(out);
+                }
+
+                //Message Reading loop
+                String message;
+                while ((message = in.readLine()) != null) {
+                    System.out.println("Response: " + message);
+
+                    synchronized (clientWriters) {
+                        // iterate through each synchronized clientWriter and if a writer does not belong to
+                         // the sender itself (out) then send the message
+                        for (PrintWriter writer : clientWriters) {
+                            if (writer != out) {
+                                writer.println(message);
+                            }
+                        }
+                    }
+                }
+
+                //Exception Handling
+            } catch (IOException e) {
+                System.out.println("Error." + e.getMessage());
+            } finally {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                }
+                //finally removing the sender and breaking operation
+                synchronized (clientWriters) {
+                    clientWriters.remove(out);
+                }
+            }
+        }
+    }
+}*/
