@@ -1,0 +1,40 @@
+/*import java.io.*;
+import java.net.*;
+
+public class Main{
+    public static void main(String[] args) throws Exception {
+
+        //Client's IP and Port number it's waiting on
+        Socket socket = new Socket("localhost" , 9090);
+
+        try{
+            //Receiving the data from server through InputStream and Sending via OutputStream
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream() , true);
+
+            //Recieving data via an input device from client through BufferedReader
+            BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+
+            System.out.println(in.readLine());
+
+            String inputFromClient;
+            while(true){
+                System.out.println("You: ");
+                  inputFromClient = keyboard.readLine();
+                    out.println(inputFromClient);
+
+                    //If client says exit then break operation
+                if(inputFromClient.equalsIgnoreCase("exit")){
+                    break;
+                }
+            }
+
+            //Receiving server's response
+            String response = in.readLine();
+            System.out.println("Server: " + response);
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+}*/
