@@ -1,0 +1,67 @@
+//KEEP ON SERVING THE CLIENT UNTIL IT EXITS
+/*import java.io.*;
+import java.net.*;
+
+//Handling the client through threading which helps us run a sequence of instructions
+class ClientHandler extends Thread {
+    private Socket clientSocket;
+
+
+    //Constructor for the client's socket
+    public ClientHandler(Socket socket){
+        this.clientSocket = socket;
+    }
+
+    //Running the server by receiving data, storing it in the buffer, and sending data with refreshing every time
+    public void run(){
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            out.println("Server Online...");
+
+            //while the message is not empty, if client says exit then break operation
+            String message;
+            while ((message = in.readLine()) != null) {
+                if (message.equalsIgnoreCase("exit")) {
+                    out.println("Ending conversation. Bye!");
+                    break;
+                }
+            }
+            //closing the client's socket
+            clientSocket.close();
+            System.out.println("Server disconnected.");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+}
+
+//Main class for server
+public class Main {
+    public static void main(String[] args) throws Exception {
+        try {
+            //Server operates on a port number for example 9090
+            ServerSocket serverSocket = new ServerSocket(9090);
+
+            System.out.println("Server online...");
+
+            while (true) {
+
+                //waiting for client's connection
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Client connected successfully!");
+
+
+                ClientHandler clientHandler = new ClientHandler(clientSocket);
+
+                //Calling the client handler and executing the run method by .start function
+                clientHandler.start();
+
+                //waiting until the current client says exit
+                clientHandler.join();
+            }
+        } catch (IOException | InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+}*/
